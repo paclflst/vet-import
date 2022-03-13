@@ -1,0 +1,31 @@
+services:
+  vet_import:
+    depends_on:
+      - postgres
+    build:
+        dockerfile: Docker/vet_import.dockerfile
+        context: ./
+    volumes:
+    - ./:/home
+    environment: 
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_HOST
+
+  postgres:
+    image: postgres:13
+    ports:
+      - 7799:5432
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    volumes:
+      - ./sql/psql_dump.sql:/docker-entrypoint-initdb.d/psql_dump.sql
+      - ./postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "import", "-d", "vet_import"]
+      interval: 5s
+      retries: 5
+    restart: always
