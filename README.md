@@ -32,5 +32,13 @@ If you wish to import other files place them to the root folder of the project (
 docker-compose run vet_import python vet_import.py your_file_name.xlsx
 ```
 
+### Database
+To connect to database and check the results use 
+
+```shell
+psql -U import -h localhost -p 7799 -d vet_import
+```
+then enter *password*
+
 ### Logging
 Solution logs can be accessed in *application.log* file
