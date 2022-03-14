@@ -1,5 +1,3 @@
-CREATE ROLE import WITH LOGIN ENCRYPTED PASSWORD 'password'
-
 CREATE TABLE public.dim_hospital (
 	hospital_id serial4 NOT NULL,
 	hospital_original_id varchar(200) NOT NULL,
