@@ -73,6 +73,8 @@ def main(filename: str = r'modelling-1.xlsx'):
             visit_df = df.apply(
                 lambda row: vis_proc.extract_attributes(row), axis=1)
             dbs.save_fact_table(visit_df, 'fact_visit')
+
+            logger.debug(f'Finish import {filename}')
     except Exception as e:
         logger.error(f'Import failed for file {filename}: \n{e}')
 
